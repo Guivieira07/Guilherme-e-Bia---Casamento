@@ -13,6 +13,7 @@
             --color-marrom-escuro: #5D4037; /* Marrom mais elegante */
             --color-bege-claro: #F9F6F0; /* Off-white suave */
             --color-detalhe: #BCAAA4; /* Marrom claro para detalhes */
+            --color-texto: #333;
             --font-serif: 'Playfair Display', serif;
             --font-sans: 'Montserrat', sans-serif;
         }
@@ -22,7 +23,7 @@
             margin: 0;
             font-family: var(--font-sans);
             line-height: 1.6;
-            color: #333;
+            color: var(--color-texto);
             background-color: var(--color-bege-claro);
             scroll-behavior: smooth;
         }
@@ -48,26 +49,51 @@
         .bg-branco { background-color: white; }
 
         /* Header e Contagem */
-        #main-header { padding: 80px 20px; }
-        h1 { font-size: 3em; }
-        /* ... outros estilos ... */
+        #main-header { 
+            padding: 80px 20px; 
+            color: white; 
+            position: relative; /* Necessário para posicionar o fundo */
+            overflow: hidden;
+        }
+        
+        /* 📍 NOVO ESTILO: Elemento para o Fundo Desfocado */
+        #header-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1; /* Fica atrás do conteúdo */
+            
+            /* 1. Imagem de Fundo e Overlay Marrom */
+            background-image: linear-gradient(rgba(93, 64, 55, 0.75), rgba(93, 64, 55, 0.75)), 
+                              url('URL_DA_SUA_FOTO_AQUI.jpg'); /* ⬅️ SUBSTITUA AQUI! */
+            
+            /* 2. Propriedades de Ajuste */
+            background-size: cover;
+            background-position: center center;
+            
+            /* 3. EFEITO DE DESFOQUE */
+            filter: blur(3px); 
+            -webkit-filter: blur(3px); 
+        }
+        /* 📍 NOVO ESTILO: Container de Conteúdo (para ser NÍTIDO) */
+        .header-content-container {
+            position: relative;
+            z-index: 2; /* Fica sobre o fundo desfocado */
+        }
+        
         #main-header h1 {
             color: white;
-            font-size: 3.5em; /* Valor padrão */
+            font-size: 3.5em; 
             margin-bottom: 5px;
-        }
-        /* Novo: Garante que o nome caiba bem em telas pequenas */
-        @media (max-width: 400px) {
-            #main-header h1 {
-                font-size: 2em; 
-            }
         }
         #main-header h2 {
             color: white;
             font-size: 1.2em;
             letter-spacing: 5px;
             margin-top: 0;
-            font-family: var(--font-sans); /* Título secundário mais limpo */
+            font-family: var(--font-sans); 
         }
         #countdown {
             font-family: var(--font-sans);
@@ -76,9 +102,16 @@
             margin-top: 25px;
             padding: 10px;
             background: rgba(255, 255, 255, 0.1);
-            border-radius: 8px; /* Mais arredondado */
+            border-radius: 8px; 
             display: inline-block;
             letter-spacing: 1px;
+        }
+        
+        /* Responsividade do Header */
+        @media (max-width: 400px) {
+            #main-header h1 {
+                font-size: 2.5em; 
+            }
         }
 
         /* Introdução (Texto) */
@@ -101,15 +134,12 @@
             position: relative;
             margin: 0 auto;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            border-radius: 10px; /* Bordas suaves */
+            border-radius: 10px; 
         }
-        .carousel-slide {
-            display: flex;
-            transition: transform 0.5s ease-in-out; 
-        }
+        .carousel-slide { display: flex; transition: transform 0.5s ease-in-out; }
         .carousel-slide img {
             width: 100%;
-            height: 300px; /* Mais alto */
+            height: 300px;
             object-fit: cover; 
             flex-shrink: 0;
         }
@@ -125,6 +155,10 @@
             justify-content: center;
             align-items: center;
             transition: background-color 0.3s;
+            position: absolute; /* Adicionado para garantir posição */
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
         }
         .carousel-nav-btn:hover { background-color: var(--color-marrom-escuro); }
         #prevBtn { left: 10px; }
@@ -170,16 +204,16 @@
             box-sizing: border-box;
             transition: border-color 0.3s;
         }
-        #rsvpForm input:focus, #rsvpForm textarea:focus {
-            border-color: var(--color-marrom-escuro);
-            outline: none;
-        }
+        #rsvpForm input:focus, #rsvpForm textarea:focus { border-color: var(--color-marrom-escuro); outline: none; }
         #submitButton {
             padding: 15px;
             background-color: var(--color-marrom-escuro);
+            color: white;
+            border: none;
             border-radius: 5px;
             font-size: 1em;
             font-weight: 600;
+            cursor: pointer;
             transition: background-color 0.3s;
             text-transform: uppercase;
         }
@@ -198,42 +232,28 @@
             font-size: 0.9em;
             letter-spacing: 1px;
         }
-        .gift-link-btn.secondary {
-            background-color: var(--color-bege-claro);
-            color: var(--color-marrom-escuro);
-        }
-        .gift-link-btn.secondary:hover {
-            background-color: var(--color-detalhe);
-            color: white;
-        }
-        .gift-link-btn.primary {
-            background-color: var(--color-marrom-escuro);
-            color: white;
-            border-color: var(--color-marrom-escuro);
-        }
-        .gift-link-btn.primary:hover {
-            background-color: #4E342E;
-        }
+        .gift-link-btn.secondary { background-color: var(--color-bege-claro); color: var(--color-marrom-escuro); }
+        .gift-link-btn.secondary:hover { background-color: var(--color-detalhe); color: white; }
+        .gift-link-btn.primary { background-color: var(--color-marrom-escuro); color: white; border-color: var(--color-marrom-escuro); }
+        .gift-link-btn.primary:hover { background-color: #4E342E; }
 
         /* Footer */
-        footer {
-            padding: 30px;
-            font-size: 1em;
-            font-family: var(--font-sans);
-            font-weight: 300;
-            letter-spacing: 1px;
-        }
+        footer { padding: 30px; font-size: 1em; font-family: var(--font-sans); font-weight: 300; letter-spacing: 1px; }
     </style>
 </head>
 <body>
 
-   <header id="main-header" class="bg-marrom">
-    <h1>GUILHERME <span style="font-size: 0.9em;">&</span> BIA</h1>
-    <h2>O Nosso Grande Dia</h2>
-    <div id="countdown">
-        Carregando contagem...
-    </div>
-</header>
+    <header id="main-header">
+        <div id="header-background"></div>
+
+        <div class="header-content-container">
+            <h1>GUILHERME <span style="font-size: 0.9em;">&</span> BIA</h1>
+            <h2>O Nosso Grande Dia</h2>
+            <div id="countdown">
+                Carregando contagem...
+            </div>
+        </div>
+    </header>
 
     <section id="introduction" class="bg-bege">
         <p style="max-width: 600px; margin: 0 auto;">
@@ -248,10 +268,11 @@
         
         <div class="carousel-container">
             <div class="carousel-slide" id="carouselSlide">
-                <img src="https://via.placeholder.com/500x300/E0D9CC/5D4037?text=Foto+1+-+Guilherme+e+Bia" alt="Foto 1 do Casal">
-                <img src="https://via.placeholder.com/500x300/D1C4B3/5D4037?text=Foto+2+-+Nossa+Historia" alt="Foto 2 do Casal">
-                <img src="https://via.placeholder.com/500x300/C2B5A5/5D4037?text=Foto+3+-+O+Pedido" alt="Foto 3 do Casal">
-                <img src="https://via.placeholder.com/500x300/B3A698/5D4037?text=Foto+4+-+Lua+de+Mel+Vem+Ai" alt="Foto 4 do Casal">
+                <img src="img/WhatsApp Image 2025-12-03 at 13.31.37.jpeg" alt="Foto 1 do Casal">
+                <img src="img/WhatsApp Image 2025-12-03 at 13.31.38 (1).jpeg" alt="Foto 2 do Casal">
+                <img src="img/WhatsApp Image 2025-12-03 at 13.31.38 (2).jpeg" alt="Foto 3 do Casal">
+                <img src="img/WhatsApp Image 2025-12-03 at 13.31.38 (3).jpeg" alt="Foto 4 do Casal">
+                 <img src="img/WhatsApp Image 2025-12-03 at 13.31.38.jpeg" alt="Foto 5 do Casal">
             </div>
             
             <button id="prevBtn" class="carousel-nav-btn"> &lt; </button>
@@ -328,7 +349,7 @@
             </div>
 
             <h3 style="border-bottom: 1px solid var(--color-detalhe); padding: 20px 0 10px; margin-top: 40px;">Traje</h3>
-            <p>Pedimos Traje Social!</p>
+            <p>Pedimos Traje Social</p>
         </div>
     </section>
 
