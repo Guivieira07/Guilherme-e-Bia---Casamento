@@ -10,9 +10,9 @@
     <style>
         /* Variáveis de Cores e Fontes */
         :root {
-            --color-marrom-escuro: #5D4037; /* Marrom mais elegante */
-            --color-bege-claro: #F9F6F0; /* Off-white suave */
-            --color-detalhe: #BCAAA4; /* Marrom claro para detalhes */
+            --color-marrom-escuro: #5D4037; 
+            --color-bege-claro: #F9F6F0; 
+            --color-detalhe: #BCAAA4; 
             --color-texto: #333;
             --font-serif: 'Playfair Display', serif;
             --font-sans: 'Montserrat', sans-serif;
@@ -36,7 +36,7 @@
             letter-spacing: 2px;
             margin-bottom: 0.5em;
         }
-        h1 { font-size: 3em; }
+        h1 { font-size: 2em; }
         h2 { font-size: 1.8em; }
 
         /* Estrutura das Seções */
@@ -52,7 +52,7 @@
         #main-header { 
             padding: 80px 20px; 
             color: white; 
-            position: relative; /* Necessário para posicionar o fundo */
+            position: relative; 
             overflow: hidden;
         }
         
@@ -63,7 +63,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 1; /* Fica atrás do conteúdo */
+            z-index: 1; 
             
             /* 1. Imagem de Fundo e Overlay Marrom */
             background-image: linear-gradient(rgba(93, 64, 55, 0.75), rgba(93, 64, 55, 0.75)), 
@@ -80,12 +80,12 @@
         /* 📍 NOVO ESTILO: Container de Conteúdo (para ser NÍTIDO) */
         .header-content-container {
             position: relative;
-            z-index: 2; /* Fica sobre o fundo desfocado */
+            z-index: 2; 
         }
         
         #main-header h1 {
             color: white;
-            font-size: 3.5em; 
+            font-size: 2.5em; /* Ajustado para um valor padrão que funciona melhor */
             margin-bottom: 5px;
         }
         #main-header h2 {
@@ -107,10 +107,13 @@
             letter-spacing: 1px;
         }
         
-        /* Responsividade do Header */
-        @media (max-width: 400px) {
+        /* 🚨 CORREÇÃO CRÍTICA: Forçar h1 em UMA LINHA no Mobile */
+        @media (max-width: 450px) {
             #main-header h1 {
-                font-size: 2.5em; 
+                font-size: 9vw !important; /* Ajusta o tamanho da fonte com a largura da tela */
+                white-space: nowrap; /* Impede a quebra de linha */
+                overflow: hidden; 
+                text-overflow: clip; 
             }
         }
 
@@ -155,7 +158,7 @@
             justify-content: center;
             align-items: center;
             transition: background-color 0.3s;
-            position: absolute; /* Adicionado para garantir posição */
+            position: absolute; 
             top: 50%;
             transform: translateY(-50%);
             z-index: 10;
@@ -163,7 +166,15 @@
         .carousel-nav-btn:hover { background-color: var(--color-marrom-escuro); }
         #prevBtn { left: 10px; }
         #nextBtn { right: 10px; }
-
+        
+        /* 🚨 AJUSTE PARA FOTO ESPECÍFICA NO CARROSSEL */
+         #ajuste-foto-2 {
+    /* Por padrão, o object-position é 'center center'. 
+       Mover para 'top center' ou '50% 30%' garante que o topo seja visível. 
+       Recomendamos começar com 'center top'.
+    */
+         object-position: center top !important; 
+        }
 
         /* Localização e Mapa */
         #location-section a {
@@ -247,7 +258,7 @@
         <div id="header-background"></div>
 
         <div class="header-content-container">
-            <h1>GUILHERME <span style="font-size: 0.9em;">&</span> BIA</h1>
+            <h1>GUILHERME & BIA</h1>
             <h2>O Nosso Grande Dia</h2>
             <div id="countdown">
                 Carregando contagem...
@@ -269,14 +280,14 @@
         <div class="carousel-container">
             <div class="carousel-slide" id="carouselSlide">
                 <img src="img/WhatsApp Image 2025-12-03 at 13.31.37.jpeg" alt="Foto 1 do Casal">
-                <img src="img/WhatsApp Image 2025-12-03 at 13.31.38 (1).jpeg" alt="Foto 2 do Casal">
+                <img src="img/WhatsApp Image 2025-12-03 at 13.31.38 (1).jpeg" alt="Foto 2 do Casal" id="ajuste-foto-2">
                 <img src="img/WhatsApp Image 2025-12-03 at 13.31.38 (2).jpeg" alt="Foto 3 do Casal">
                 <img src="img/WhatsApp Image 2025-12-03 at 13.31.38 (3).jpeg" alt="Foto 4 do Casal">
-                 <img src="img/WhatsApp Image 2025-12-03 at 13.31.38.jpeg" alt="Foto 5 do Casal">
+                <img src="img/WhatsApp Image 2025-12-03 at 13.31.38.jpeg" alt="Foto 5 do Casal">
             </div>
             
-            <button id="prevBtn" class="carousel-nav-btn"> &lt; </button>
-            <button id="nextBtn" class="carousel-nav-btn"> &gt; </button>
+            <button id="prevBtn" class="carousel-nav-btn"> < </button>
+            <button id="nextBtn" class="carousel-nav-btn"> > </button>
         </div>
     </section>
 
@@ -356,7 +367,6 @@
     <footer class="bg-marrom">
         <p>Com Carinho, Guilherme & Bia. Mal podemos esperar por você!</p>
     </footer>
-
 
     <script>
         // ***** SUBSTITUA ESTE ENDEREÇO PELO SEU URL DO GOOGLE APPS SCRIPT *****
