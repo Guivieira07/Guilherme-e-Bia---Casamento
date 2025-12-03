@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guilherme & Bia - Nosso Casamento</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Variáveis de Cores e Fontes */
+        :root {
+            --color-marrom-escuro: #5D4037; /* Marrom mais elegante */
+            --color-bege-claro: #F9F6F0; /* Off-white suave */
+            --color-detalhe: #BCAAA4; /* Marrom claro para detalhes */
+            --font-serif: 'Playfair Display', serif;
+            --font-sans: 'Montserrat', sans-serif;
+        }
+        
+        /* Reset e Estilo Base */
+        body {
+            margin: 0;
+            font-family: var(--font-sans);
+            line-height: 1.6;
+            color: #333;
+            background-color: var(--color-bege-claro);
+            scroll-behavior: smooth;
+        }
+
+        /* Títulos */
+        h1, h2, h3 {
+            font-family: var(--font-serif);
+            color: var(--color-marrom-escuro);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 0.5em;
+        }
+        h1 { font-size: 3em; }
+        h2 { font-size: 1.8em; }
+
+        /* Estrutura das Seções */
+        section {
+            padding: 60px 20px;
+            text-align: center;
+        }
+        .bg-marrom { background-color: var(--color-marrom-escuro); color: white; }
+        .bg-bege { background-color: var(--color-bege-claro); }
+        .bg-branco { background-color: white; }
+
+        /* Header e Contagem */
+        #main-header { padding: 80px 20px; }
+        #main-header h1 {
+            color: white;
+            font-size: 3.5em; /* Aumentado para mais impacto */
+            margin-bottom: 5px;
+        }
+        #main-header h2 {
+            color: white;
+            font-size: 1.2em;
+            letter-spacing: 5px;
+            margin-top: 0;
+            font-family: var(--font-sans); /* Título secundário mais limpo */
+        }
+        #countdown {
+            font-family: var(--font-sans);
+            font-weight: 600;
+            font-size: 1.5em;
+            margin-top: 25px;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px; /* Mais arredondado */
+            display: inline-block;
+            letter-spacing: 1px;
+        }
+
+        /* Introdução (Texto) */
+        #introduction p {
+            font-family: var(--font-serif);
+            font-size: 1.3em;
+        }
+        #introduction p:last-child {
+            font-family: var(--font-sans);
+            font-weight: 600;
+            font-size: 1em;
+            letter-spacing: 1px;
+        }
+
+        /* Carrossel */
+        .carousel-container {
+            max-width: 90%;
+            max-width: 500px;
+            overflow: hidden; 
+            position: relative;
+            margin: 0 auto;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 10px; /* Bordas suaves */
+        }
+        .carousel-slide {
+            display: flex;
+            transition: transform 0.5s ease-in-out; 
+        }
+        .carousel-slide img {
+            width: 100%;
+            height: 300px; /* Mais alto */
+            object-fit: cover; 
+            flex-shrink: 0;
+        }
+        .carousel-nav-btn {
+            background-color: rgba(93, 64, 55, 0.8);
+            color: white;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            padding: 0;
+            line-height: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background-color 0.3s;
+        }
+        .carousel-nav-btn:hover { background-color: var(--color-marrom-escuro); }
+        #prevBtn { left: 10px; }
+        #nextBtn { right: 10px; }
+
+
+        /* Localização e Mapa */
+        #location-section a {
+            padding: 15px 30px;
+            background-color: var(--color-marrom-escuro);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            display: inline-block;
+            transition: background-color 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        #location-section a:hover { background-color: #4E342E; }
+        #location-section iframe {
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Formulário (RSVP) */
+        #rsvpForm {
+            max-width: 450px;
+            margin: 0 auto;
+            display: grid;
+            gap: 15px;
+            padding: 30px;
+            border-radius: 10px;
+            background-color: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        #rsvpForm input, #rsvpForm textarea {
+            padding: 12px;
+            border: 1px solid var(--color-detalhe);
+            border-radius: 5px;
+            font-family: var(--font-sans);
+            font-size: 15px;
+            box-sizing: border-box;
+            transition: border-color 0.3s;
+        }
+        #rsvpForm input:focus, #rsvpForm textarea:focus {
+            border-color: var(--color-marrom-escuro);
+            outline: none;
+        }
+        #submitButton {
+            padding: 15px;
+            background-color: var(--color-marrom-escuro);
+            border-radius: 5px;
+            font-size: 1em;
+            font-weight: 600;
+            transition: background-color 0.3s;
+            text-transform: uppercase;
+        }
+        #submitButton:hover { background-color: #4E342E; }
+
+        /* Lista de Presentes/Links */
+        .gift-link-btn {
+            padding: 14px;
+            border: 1px solid var(--color-marrom-escuro);
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 600;
+            display: block;
+            transition: background-color 0.3s, color 0.3s;
+            text-transform: uppercase;
+            font-size: 0.9em;
+            letter-spacing: 1px;
+        }
+        .gift-link-btn.secondary {
+            background-color: var(--color-bege-claro);
+            color: var(--color-marrom-escuro);
+        }
+        .gift-link-btn.secondary:hover {
+            background-color: var(--color-detalhe);
+            color: white;
+        }
+        .gift-link-btn.primary {
+            background-color: var(--color-marrom-escuro);
+            color: white;
+            border-color: var(--color-marrom-escuro);
+        }
+        .gift-link-btn.primary:hover {
+            background-color: #4E342E;
+        }
+
+        /* Footer */
+        footer {
+            padding: 30px;
+            font-size: 1em;
+            font-family: var(--font-sans);
+            font-weight: 300;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+
+    <header id="main-header" class="bg-marrom">
+        <h1>Guilherme & Bia</h1>
+        <h2>O Nosso Grande Dia</h2>
+        <div id="countdown">
+            Carregando contagem...
+        </div>
+    </header>
+
+    <section id="introduction" class="bg-bege">
+        <p style="max-width: 600px; margin: 0 auto;">
+            Com o coração cheio de alegria, convidamos você para celebrar o dia em que uniremos nossas vidas. 
+            Sua presença é o nosso maior presente!
+        </p>
+        <p style="margin-top: 15px;">08 de Setembro de 2026 - 15h40</p>
+    </section>
+    
+    <section id="memories-section" class="bg-branco">
+        <h2 style="margin-bottom: 30px;">Nossas Memórias</h2>
+        
+        <div class="carousel-container">
+            <div class="carousel-slide" id="carouselSlide">
+                <img src="https://via.placeholder.com/500x300/E0D9CC/5D4037?text=Foto+1+-+Guilherme+e+Bia" alt="Foto 1 do Casal">
+                <img src="https://via.placeholder.com/500x300/D1C4B3/5D4037?text=Foto+2+-+Nossa+Historia" alt="Foto 2 do Casal">
+                <img src="https://via.placeholder.com/500x300/C2B5A5/5D4037?text=Foto+3+-+O+Pedido" alt="Foto 3 do Casal">
+                <img src="https://via.placeholder.com/500x300/B3A698/5D4037?text=Foto+4+-+Lua+de+Mel+Vem+Ai" alt="Foto 4 do Casal">
+            </div>
+            
+            <button id="prevBtn" class="carousel-nav-btn"> &lt; </button>
+            <button id="nextBtn" class="carousel-nav-btn"> &gt; </button>
+        </div>
+    </section>
+
+    <section id="location-section" class="bg-bege">
+        <h2 style="margin-bottom: 30px;">Villa Trésor - Onde Celebrar</h2>
+        <p style="text-align: center; margin-bottom: 25px;">
+            Gleba 12/14 Lote 01 - Pte. Alta Norte (Gama), Brasília - DF
+        </p>
+        
+        <div style="max-width: 100%; height: 350px; margin: 0 auto;">
+            <iframe 
+                src="https://maps.google.com/maps?q=Villa+Tr%C3%A9sor+-+Gleba+12%2F14+Lote+01+-+Pte.+Alta+Norte+(Gama)%2C+Bras%C3%ADlia+-+DF%2C+72427-010&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+                width="100%" 
+                height="100%" 
+                style="border:0;" 
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
+        
+        <div style="text-align: center; margin-top: 30px;">
+            <a href="https://maps.app.goo.gl/d3T6Q5eL7HhQ8p5t8" target="_blank">
+                 Abrir no GPS (Waze/Google Maps)
+            </a>
+        </div>
+    </section>
+
+    <section id="rsvp-section" class="bg-branco">
+        <h2 style="margin-bottom: 30px;">
+            Confirme Sua Presença
+        </h2>
+        
+        <form id="rsvpForm">
+            <input type="text" id="nomeCompleto" name="nomeCompleto" placeholder="Nome Completo (Convidado Principal)" required>
+            <input type="text" id="emailTelefone" name="emailTelefone" placeholder="E-mail ou Telefone" required>
+            <input type="number" id="totalPessoas" name="totalPessoas" placeholder="Total de Pessoas (Incluindo você)" required min="1">
+            <textarea id="restricoes" name="restricoes" placeholder="Restrições Alimentares ou Alergias (Opcional)"></textarea>
+            <input type="text" id="musicaFavorita" name="musicaFavorita" placeholder="Música que não pode faltar na festa! (Opcional)">
+
+            <button type="submit" id="submitButton">
+                CONFIRMAR!
+            </button>
+        </form>
+        
+        <p id="responseMessage" style="text-align: center; margin-top: 20px; font-weight: bold;"></p>
+    </section>
+
+    <section id="info-section" class="bg-bege">
+        <h2 style="margin-bottom: 30px;">Informações Úteis</h2>
+        <div style="max-width: 600px; margin: 0 auto; text-align: center;">
+
+            <h3 style="border-bottom: 1px solid var(--color-detalhe); padding-bottom: 10px; margin-top: 0;">Lista de Presentes</h3>
+            <p>A maior alegria é a sua presença! Caso queira nos presentear, deixamos algumas sugestões:</p>
+            
+            <div style="margin: 20px 0; display: flex; flex-direction: column; gap: 12px;">
+                
+                <a href="#" target="_blank" id="linkLoja1" class="gift-link-btn secondary">
+                    🛍️ Loja de Presentes (COLE O LINK AQUI)
+                </a>
+                
+                <a href="#" target="_blank" id="linkLoja2" class="gift-link-btn secondary">
+                    Honeymoon/Cotas de Lua de Mel (COLE O LINK AQUI)
+                </a>
+
+                <a href="#" target="_blank" id="linkPix" class="gift-link-btn primary">
+                    💰 Presente em Dinheiro / PIX (COLE O LINK AQUI)
+                </a>
+
+            </div>
+
+            <h3 style="border-bottom: 1px solid var(--color-detalhe); padding: 20px 0 10px; margin-top: 40px;">Traje</h3>
+            <p>Pedimos Traje Social. As cores Marrom, Bege e Tons Terrosos são bem-vindas!</p>
+        </div>
+    </section>
+
+    <footer class="bg-marrom">
+        <p>Com Carinho, Guilherme & Bia. Mal podemos esperar por você!</p>
+    </footer>
+
+
+    <script>
+        // ***** SUBSTITUA ESTE ENDEREÇO PELO SEU URL DO GOOGLE APPS SCRIPT *****
+        const webAppUrl = 'https://script.google.com/macros/s/AKfycbxLZ9sH3pKhyPmC52BDl0ss5D9suvKY7VA2lFV4Nm4YiQJHGfBlEMGyLhsRWPdDcOaYQA/exec'; 
+        // ********************************************************************
+
+        const form = document.getElementById('rsvpForm');
+        const responseMessage = document.getElementById('responseMessage');
+        const submitButton = document.getElementById('submitButton');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault(); 
+
+            const formData = new FormData(form);
+            const data = new URLSearchParams(formData);
+            
+            submitButton.disabled = true;
+            submitButton.textContent = 'ENVIANDO...';
+            responseMessage.style.color = '#5D4037';
+            responseMessage.textContent = 'Aguarde um momento...';
+
+            fetch(webAppUrl, {
+                method: 'POST',
+                body: data
+            })
+            .then(response => response.json())
+            .then(result => {
+                if (result.result === 'success') {
+                    responseMessage.style.color = '#4CAF50'; 
+                    responseMessage.textContent = 'Sua presença foi confirmada! Obrigado(a)!';
+                    form.reset(); 
+                } else {
+                    responseMessage.style.color = '#f44336'; 
+                    responseMessage.textContent = 'Erro ao confirmar presença. Tente novamente.';
+                }
+            })
+            .catch(error => {
+                console.error('Erro de rede:', error);
+                responseMessage.style.color = '#f44336';
+                responseMessage.textContent = 'Erro de conexão. Verifique sua internet ou tente mais tarde.';
+            })
+            .finally(() => {
+                submitButton.disabled = false;
+                submitButton.textContent = 'CONFIRMAR!';
+            });
+        });
+    </script>
+    
+    <script>
+        const weddingDate = new Date("Sep 8, 2026 15:40:00").getTime();
+        
+        const countdownFunction = setInterval(function() {
+
+            const now = new Date().getTime();
+            const distance = weddingDate - now;
+            
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            document.getElementById("countdown").innerHTML = 
+                days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+            
+            if (distance < 0) {
+                clearInterval(countdownFunction);
+                document.getElementById("countdown").innerHTML = "CASADOS!";
+            }
+        }, 1000); 
+    </script>
+    
+    <script>
+        const slide = document.getElementById('carouselSlide');
+        const images = slide.querySelectorAll('img');
+        const nextBtn = document.getElementById('nextBtn');
+        const prevBtn = document.getElementById('prevBtn');
+        let counter = 0;
+        
+        window.addEventListener('load', () => {
+            const size = images[0].clientWidth; // Largura de uma imagem
+            
+            function moveSlide() {
+                slide.style.transform = 'translateX(' + (-size * counter) + 'px)';
+            }
+
+            nextBtn.addEventListener('click', () => {
+                if (counter >= images.length - 1) {
+                    counter = 0;
+                } else {
+                    counter++;
+                }
+                moveSlide();
+            });
+
+            prevBtn.addEventListener('click', () => {
+                if (counter <= 0) {
+                    counter = images.length - 1;
+                } else {
+                    counter--;
+                }
+                moveSlide();
+            });
+
+            setInterval(() => {
+                if (counter >= images.length - 1) {
+                    counter = 0;
+                } else {
+                    counter++;
+                }
+                moveSlide();
+            }, 5000);
+        });
+    </script>
+</body>
+</html>
