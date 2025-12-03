@@ -26,7 +26,7 @@
             color: var(--color-texto);
             background-color: var(--color-bege-claro);
             scroll-behavior: smooth;
-            padding-bottom: 65px; /* 📍 UX: Espaço para o menu fixo inferior */
+            padding-bottom: 65px; /* UX: Espaço para o menu fixo inferior */
         }
 
         /* Títulos */
@@ -72,7 +72,8 @@
             
             /* 2. Propriedades de Ajuste */
             background-size: cover;
-            background-position: 50% 30%; /* Ajuste para priorizar o topo da foto de fundo */
+            /* Padrão para mobile */
+            background-position: 50% 30%; 
             
             /* 3. EFEITO DE DESFOQUE */
             filter: blur(0.5em); 
@@ -109,13 +110,22 @@
             letter-spacing: 1px;
         }
         
-        /* 🚨 CORREÇÃO CRÍTICA: Força h1 em UMA LINHA no Mobile */
+        /* Força h1 em UMA LINHA no Mobile */
         @media (max-width: 450px) {
             #main-header h1 {
                 font-size: 9vw !important; 
                 white-space: nowrap; 
                 overflow: hidden; 
                 text-overflow: clip; 
+            }
+        }
+        
+        /* 🚨 NOVO: CORREÇÃO DE CORTE NO COMPUTADOR/DESKTOP (Tela Larga) */
+        @media (min-width: 768px) {
+            #header-background {
+                /* Força o topo da imagem a ser exibido, corrigindo o corte das cabeças */
+                background-position: center center !important; 
+
             }
         }
 
@@ -148,7 +158,7 @@
             object-fit: cover; 
             flex-shrink: 0;
         }
-        /* 🚨 AJUSTE PARA FOTO ESPECÍFICA NO CARROSSEL (Evita cortar as cabeças) */
+        /* Ajuste para fotos específicas no carrossel */
         #ajuste-foto-2, #ajuste-foto-9 {
             object-position: center top !important; 
         }
@@ -249,20 +259,19 @@
         /* Footer */
         footer { padding: 30px; font-size: 1em; font-family: var(--font-sans); font-weight: 300; letter-spacing: 1px; }
 
-        /* 📍 NOVO ESTILO: FIXED BOTTOM NAVIGATION (Menu Flutuante) */
+        /* 📍 FIXED BOTTOM NAVIGATION (Menu Flutuante - Ajustado para 85% de opacidade) */
         #fixed-nav {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            background-color: rgba(255, 255, 255, 0.55); 
+            background-color: rgba(255, 255, 255, 0.55); /* 🚨 Ajuste de transparência aqui */
             box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
             z-index: 1000; 
             display: flex;
             justify-content: space-around;
             padding: 10px 0;
             box-sizing: border-box;
-            
         }
 
         .nav-item {
@@ -327,29 +336,29 @@
     </section>
 
     <section id="location-section" class="bg-bege">
-    <h2 style="margin-bottom: 30px;">Villa Trésor - Onde Celebrar</h2>
-    <p style="text-align: center; margin-bottom: 25px;">
-        Gleba 12/14 Lote 01 - Pte. Alta Norte (Gama), Brasília - DF
-    </p>
-    
-    <div style="max-width: 100%; height: 350px; margin: 0 auto;">
-        <iframe 
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3836.0558964533693!2d-48.03060752658863!3d-15.958457127012862!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x935a2bc74eafb183%3A0x9da8ecd134e3b58b!2sVilla%20Tr%C3%A9sor!5e0!3m2!1spt-BR!2sbr!4v1764786836787!5m2!1spt-BR!2sbr" 
-            width="100%" 
-            height="100%" 
-            style="border:0;" 
-            allowfullscreen="" 
-            loading="lazy" 
-            referrerpolicy="no-referrer-when-downgrade">
-        </iframe>
-    </div>
-    
-    <div style="text-align: center; margin-top: 30px;">
-        <a href="https://maps.app.goo.gl/oDSoXcdx3tanPREu8" target="_blank">
-             Abrir no GPS (Google Maps)
-        </a>
-    </div>
-</section>
+        <h2 style="margin-bottom: 30px;">Villa Trésor - Onde Celebrar</h2>
+        <p style="text-align: center; margin-bottom: 25px;">
+            Gleba 12/14 Lote 01 - Pte. Alta Norte (Gama), Brasília - DF
+        </p>
+        
+        <div style="max-width: 100%; height: 350px; margin: 0 auto;">
+            <iframe 
+                src="https://maps.google.com/maps?q=Villa+Tr%C3%A9sor+-+Gleba+12%2F14+Lote+01+-+Pte.+Alta+Norte+(Gama)%2C+Bras%C3%ADlia+-+DF%2C+72427-010&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+                width="100%" 
+                height="100%" 
+                style="border:0;" 
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+        </div>
+        
+        <div style="text-align: center; margin-top: 30px;">
+            <a href="https://maps.app.goo.gl/d3T6Q5eL7HhQ8p5t8" target="_blank">
+                > Abrir google maps <
+            </a>
+        </div>
+    </section>
 
     <section id="rsvp-section" class="bg-branco">
         <h2 style="margin-bottom: 30px;">
@@ -393,6 +402,7 @@
                 </a>
 
             </div>
+
         </div>
     </section>
 
