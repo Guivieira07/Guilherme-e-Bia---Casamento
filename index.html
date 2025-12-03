@@ -49,11 +49,18 @@
 
         /* Header e Contagem */
         #main-header { padding: 80px 20px; }
+        h1 { font-size: 3em; }
+        /* ... outros estilos ... */
         #main-header h1 {
             color: white;
-            font-size: 2.5em; /* Aumentado para mais impacto */
+            font-size: 3.5em; /* Valor padrão */
             margin-bottom: 5px;
-            margin-right: auto;
+        }
+        /* Novo: Garante que o nome caiba bem em telas pequenas */
+        @media (max-width: 400px) {
+            #main-header h1 {
+                font-size: 2.5em; 
+            }
         }
         #main-header h2 {
             color: white;
@@ -220,13 +227,13 @@
 </head>
 <body>
 
-    <header id="main-header" class="bg-marrom">
-        <h1>Guilherme e Bia</h1>
-        <h2>O Nosso Grande Dia</h2>
-        <div id="countdown">
-            Carregando contagem...
-        </div>
-    </header>
+   <header id="main-header" class="bg-marrom">
+    <h1>GUILHERME <span style="font-size: 0.9em;">&</span> BIA</h1>
+    <h2>O Nosso Grande Dia</h2>
+    <div id="countdown">
+        Carregando contagem...
+    </div>
+</header>
 
     <section id="introduction" class="bg-bege">
         <p style="max-width: 600px; margin: 0 auto;">
