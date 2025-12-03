@@ -26,6 +26,7 @@
             color: var(--color-texto);
             background-color: var(--color-bege-claro);
             scroll-behavior: smooth;
+            padding-bottom: 65px; /* 📍 UX: Espaço para o menu fixo inferior */
         }
 
         /* Títulos */
@@ -56,7 +57,7 @@
             overflow: hidden;
         }
         
-        /* 📍 NOVO ESTILO: Elemento para o Fundo Desfocado */
+        /* 📍 ELEMENTO DE FUNDO DESFOCADO */
         #header-background {
             position: absolute;
             top: 0;
@@ -71,13 +72,14 @@
             
             /* 2. Propriedades de Ajuste */
             background-size: cover;
-            background-position: center center;
+            background-position: 50% 30%; /* Ajuste para priorizar o topo da foto de fundo */
             
             /* 3. EFEITO DE DESFOQUE */
-            filter: blur(0.5px); 
-            -webkit-filter: blur(1px); 
+            filter: blur(0.5em); 
+            -webkit-filter: blur(0.5px); 
         }
-        /* 📍 NOVO ESTILO: Container de Conteúdo (para ser NÍTIDO) */
+        
+        /* 📍 Container de Conteúdo (NÍTIDO) */
         .header-content-container {
             position: relative;
             z-index: 2; 
@@ -85,7 +87,7 @@
         
         #main-header h1 {
             color: white;
-            font-size: 2.5em; /* Ajustado para um valor padrão que funciona melhor */
+            font-size: 2.5em; 
             margin-bottom: 5px;
         }
         #main-header h2 {
@@ -107,11 +109,11 @@
             letter-spacing: 1px;
         }
         
-        /* 🚨 CORREÇÃO CRÍTICA: Forçar h1 em UMA LINHA no Mobile */
+        /* 🚨 CORREÇÃO CRÍTICA: Força h1 em UMA LINHA no Mobile */
         @media (max-width: 450px) {
             #main-header h1 {
-                font-size: 9vw !important; /* Ajusta o tamanho da fonte com a largura da tela */
-                white-space: nowrap; /* Impede a quebra de linha */
+                font-size: 9vw !important; 
+                white-space: nowrap; 
                 overflow: hidden; 
                 text-overflow: clip; 
             }
@@ -146,6 +148,10 @@
             object-fit: cover; 
             flex-shrink: 0;
         }
+        /* 🚨 AJUSTE PARA FOTO ESPECÍFICA NO CARROSSEL (Evita cortar as cabeças) */
+        #ajuste-foto-2, #ajuste-foto-9 {
+            object-position: center top !important; 
+        }
         .carousel-nav-btn {
             background-color: rgba(93, 64, 55, 0.8);
             color: white;
@@ -166,23 +172,7 @@
         .carousel-nav-btn:hover { background-color: var(--color-marrom-escuro); }
         #prevBtn { left: 10px; }
         #nextBtn { right: 10px; }
-        
-        /* 🚨 AJUSTE PARA FOTO ESPECÍFICA NO CARROSSEL */
-         #ajuste-foto-2 {
-    /* Por padrão, o object-position é 'center center'. 
-       Mover para 'top center' ou '50% 30%' garante que o topo seja visível. 
-       Recomendamos começar com 'center top'.
-    */
-         object-position: center top !important; 
-        }
-       
-         #ajuste-foto-9 {
-    /* Por padrão, o object-position é 'center center'. 
-       Mover para 'top center' ou '50% 30%' garante que o topo seja visível. 
-       Recomendamos começar com 'center top'.
-    */
-         object-position: center top !important; 
-        }
+
 
         /* Localização e Mapa */
         #location-section a {
@@ -258,6 +248,39 @@
 
         /* Footer */
         footer { padding: 30px; font-size: 1em; font-family: var(--font-sans); font-weight: 300; letter-spacing: 1px; }
+
+        /* 📍 NOVO ESTILO: FIXED BOTTOM NAVIGATION (Menu Flutuante) */
+        #fixed-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.95); 
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 1000; 
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            box-sizing: border-box;
+        }
+
+        .nav-item {
+            font-family: var(--font-sans);
+            font-weight: 600;
+            color: var(--color-marrom-escuro);
+            text-decoration: none;
+            padding: 8px 12px;
+            border-radius: 20px; 
+            transition: background-color 0.3s;
+            font-size: 0.85em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-item:hover {
+            background-color: var(--color-detalhe); 
+            color: white;
+        }
     </style>
 </head>
 <body>
@@ -321,8 +344,8 @@
         </div>
         
         <div style="text-align: center; margin-top: 30px;">
-            <a href="https://maps.app.goo.gl/VQggX2fGjjRU72tE9" target="_blank">
-                 Abrir no GPS 
+            <a href="https://maps.app.goo.gl/d3T6Q5eL7HhQ8p5t8" target="_blank">
+                 Abrir no GPS (Google Maps)
             </a>
         </div>
     </section>
@@ -365,8 +388,9 @@
                 </a>
 
                 <a href="#" target="_blank" id="linkPix" class="gift-link-btn primary">
-                    💰 Presente em Dinheiro 
+                    💰 Presente em Dinheiro / PIX 
                 </a>
+
             </div>
         </div>
     </section>
@@ -374,6 +398,14 @@
     <footer class="bg-marrom">
         <p>Com Carinho, Guilherme & Bia. Mal podemos esperar por você!</p>
     </footer>
+
+    <nav id="fixed-nav">
+        <a href="#rsvp-section" class="nav-item">Presença</a>
+        <a href="#location-section" class="nav-item">Local</a>
+        <a href="#memories-section" class="nav-item">Fotos</a>
+        <a href="#info-section" class="nav-item">Presentes</a>
+    </nav>
+
 
     <script>
         // ***** SUBSTITUA ESTE ENDEREÇO PELO SEU URL DO GOOGLE APPS SCRIPT *****
@@ -453,7 +485,7 @@
         let counter = 0;
         
         window.addEventListener('load', () => {
-            const size = images[0].clientWidth; // Largura de uma imagem
+            const size = images[0].clientWidth; 
             
             function moveSlide() {
                 slide.style.transform = 'translateX(' + (-size * counter) + 'px)';
