@@ -364,19 +364,22 @@
     </section>
 
     <section id="rsvp-section" class="bg-branco">
-        <h2 style="margin-bottom: 30px;">
+        <h2 style="margin-bottom: 15px;">
             Confirme Sua Presença
         </h2>
         
+        <p style="max-width: 450px; margin: 0 auto 20px;">
+            Sua confirmação é essencial! Informe seu nome completo e o total de pessoas.
+            (Contamos apenas convidados com **mais de 9 anos**.)
+        </p>
+        
         <form id="rsvpForm">
             <input type="text" id="nomeCompleto" name="nomeCompleto" placeholder="Nome Completo (Convidado Principal)" required>
-            <input type="text" id="emailTelefone" name="emailTelefone" placeholder="E-mail ou Telefone" required>
-            <input type="number" id="totalPessoas" name="totalPessoas" placeholder="Total de Pessoas (Incluindo você)" required min="1">
-            <textarea id="restricoes" name="restricoes" placeholder="Restrições Alimentares ou Alergias (Opcional)"></textarea>
-            <input type="text" id="musicaFavorita" name="musicaFavorita" placeholder="Música que não pode faltar na festa! (Opcional)">
-
+            
+            <input type="number" id="totalPessoas" name="totalPessoas" placeholder="Total de Pessoas (> 9 anos, incluindo você)" required min="1">
+            
             <button type="submit" id="submitButton">
-                CONFIRMAR!
+                CONFIRMAR MINHA PRESENÇA
             </button>
         </form>
         
@@ -423,7 +426,7 @@
 
     <script>
         // ***** SUBSTITUA ESTE ENDEREÇO PELO SEU URL DO GOOGLE APPS SCRIPT *****
-        const webAppUrl = 'https://script.google.com/macros/s/AKfycbxLZ9sH3pKhyPmC52BDl0ss5D9suvKY7VA2lFV4Nm4YiQJHGfBlEMGyLhsRWPdDcOaYQA/exec'; 
+        const webAppUrl = 'https://script.google.com/macros/s/AKfycbwgRsFV3lYIvwwtsVCK7ssU3B4gkNdXsM_n9_gOmOOiGAbrmG9MfxbzTQaM1FKr4B0IRw/exec'; 
         // ********************************************************************
 
         const form = document.getElementById('rsvpForm');
