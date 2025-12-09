@@ -374,14 +374,20 @@
         </p>
         
         <form id="rsvpForm">
-            <input type="text" id="nomeCompleto" name="nomeCompleto" placeholder="Nome Completo (Convidado Principal)" required>
-            
-            <input type="number" id="totalPessoas" name="totalPessoas" placeholder="Total de Pessoas (> 9 anos, incluindo você)" required min="1">
-            
-            <button type="submit" id="submitButton">
-                CONFIRMAR MINHA PRESENÇA
-            </button>
-        </form>
+    <input type="text" id="nomeCompleto" name="nomeCompleto" placeholder="Nome Completo (Convidado Principal)" required>
+    
+    <div id="acompanhantesContainer" style="display: grid; gap: 10px;">
+        </div>
+    
+    <button type="button" id="addAcompanhanteBtn" 
+            style="padding: 10px; background-color: var(--color-detalhe); color: var(--color-marrom-escuro); border: none; border-radius: 5px; font-size: 0.9em; cursor: pointer;">
+        + Adicionar Acompanhante (> 9 anos)
+    </button>
+    
+    <button type="submit" id="submitButton">
+        CONFIRMAR MINHA PRESENÇA
+    </button>
+</form>
         
         <p id="responseMessage" style="text-align: center; margin-top: 20px; font-weight: bold;"></p>
     </section>
@@ -424,52 +430,86 @@
     </nav>
 
 
-    <script>
-        // ***** SUBSTITUA ESTE ENDEREÇO PELO SEU URL DO GOOGLE APPS SCRIPT *****
-        const webAppUrl = 'https://script.google.com/macros/s/AKfycbwgRsFV3lYIvwwtsVCK7ssU3B4gkNdXsM_n9_gOmOOiGAbrmG9MfxbzTQaM1FKr4B0IRw/exec'; 
-        // ********************************************************************
+   <script>
+    // 1. Lógica Dinâmica para Adicionar Acompanhantes
+    const acompanhantesContainer = document.getElementById('acompanhantesContainer');
+    const addAcompanhanteBtn = document.getElementById('addAcompanhanteBtn');
+    let acompanhanteCount = 0;
 
-        const form = document.getElementById('rsvpForm');
-        const responseMessage = document.getElementById('responseMessage');
-        const submitButton = document.getElementById('submitButton');
+    function addAcompanhante() {
+        acompanhanteCount++;
+        const novoCampo = document.createElement('input');
+        novoCampo.type = 'text';
+        // 🚨 NOME DO CAMPO: Usamos 'acompanhantes[]' para o JS saber que é uma lista!
+        novoCampo.name = 'acompanhantes'; 
+        novoCampo.placeholder = 'Nome do Acompanhante ' + acompanhanteCount;
+        novoCampo.required = true;
+        
+        // Estilos para o novo campo (você pode pegar os estilos do seu CSS)
+        novoCampo.style.padding = '12px';
+        novoCampo.style.border = '1px solid var(--color-detalhe)'; 
+        novoCampo.style.borderRadius = '5px';
+        novoCampo.style.boxSizing = 'border-box';
 
-        form.addEventListener('submit', function(e) {
-            e.preventDefault(); 
+        acompanhantesContainer.appendChild(novoCampo);
+    }
 
-            const formData = new FormData(form);
-            const data = new URLSearchParams(formData);
-            
-            submitButton.disabled = true;
-            submitButton.textContent = 'ENVIANDO...';
-            responseMessage.style.color = '#5D4037';
-            responseMessage.textContent = 'Aguarde um momento...';
+    // Inicializa o botão
+    addAcompanhanteBtn.addEventListener('click', addAcompanhante);
+    
+    
+    // 2. Lógica de Envio do Formulário (Ajustada para o novo formato)
+    
+    const webAppUrl = 'https://script.google.com/macros/s/AKfycbzkRlUzEIi1H2rcBggFDrfG3VS_ophldT-BGqLMP2q6OXDGb82lMXPH99TwTZwte6eeOw/exec'; 
+    const form = document.getElementById('rsvpForm');
+    const responseMessage = document.getElementById('responseMessage');
+    const submitButton = document.getElementById('submitButton');
 
-            fetch(webAppUrl, {
-                method: 'POST',
-                body: data
-            })
-            .then(response => response.json())
-            .then(result => {
-                if (result.result === 'success') {
-                    responseMessage.style.color = '#4CAF50'; 
-                    responseMessage.textContent = 'Sua presença foi confirmada! Obrigado(a)!';
-                    form.reset(); 
-                } else {
-                    responseMessage.style.color = '#f44336'; 
-                    responseMessage.textContent = 'Erro ao confirmar presença. Tente novamente.';
-                }
-            })
-            .catch(error => {
-                console.error('Erro de rede:', error);
-                responseMessage.style.color = '#f44336';
-                responseMessage.textContent = 'Erro de conexão. Verifique sua internet ou tente mais tarde.';
-            })
-            .finally(() => {
-                submitButton.disabled = false;
-                submitButton.textContent = 'CONFIRMAR!';
-            });
+    form.addEventListener('submit', function(e) {
+        e.preventDefault(); 
+
+        // 🚨 NOVO TRATAMENTO DE DADOS: Coleta o nome principal e os acompanhantes
+        const nomePrincipal = form.nomeCompleto.value;
+        const acompanhantes = Array.from(document.querySelectorAll('input[name="acompanhantes"]')).map(input => input.value);
+        
+        // Constrói os dados a serem enviados
+        const data = new URLSearchParams();
+        data.append('nomePrincipal', nomePrincipal);
+        data.append('acompanhantes', acompanhantes.join(', ')); // Junta todos os nomes em uma string separada por vírgula
+        
+        submitButton.disabled = true;
+        submitButton.textContent = 'ENVIANDO...';
+        responseMessage.style.color = '#5D4037';
+        responseMessage.textContent = 'Aguarde um momento...';
+
+        fetch(webAppUrl, {
+            method: 'POST',
+            body: data
+        })
+        // O restante do fetch() pode permanecer o mesmo...
+        .then(response => response.json())
+        .then(result => {
+             if (result.result === 'success') {
+                 responseMessage.style.color = '#4CAF50'; 
+                 responseMessage.textContent = 'Sua presença foi confirmada! Obrigado(a)!';
+                 form.reset(); 
+                 acompanhantesContainer.innerHTML = ''; // Limpa os campos dinâmicos
+             } else {
+                 responseMessage.style.color = '#f44336'; 
+                 responseMessage.textContent = 'Erro ao confirmar presença. Tente novamente.';
+             }
+        })
+        .catch(error => {
+             console.error('Erro de rede:', error);
+             responseMessage.style.color = '#f44336';
+             responseMessage.textContent = 'Erro de conexão. Verifique sua internet ou tente mais tarde.';
+        })
+        .finally(() => {
+             submitButton.disabled = false;
+             submitButton.textContent = 'CONFIRMAR MINHA PRESENÇA';
         });
-    </script>
+    });
+</script>
     
     <script>
         const weddingDate = new Date("Sep 8, 2026 15:40:00").getTime();
